@@ -6,7 +6,9 @@ const Token = localStorage.getItem('Token')
 require('dotenv').config()
 
 function createCurhat(req,res,next){
+
   if(!Token){
+
     res.redirect('/login')
   }
   else{
@@ -25,7 +27,9 @@ function createCurhat(req,res,next){
 }
 
 function updateCurhat(req,res,next){
+
   if(!Token){
+
     res.redirect('/login')
   }
   else{
@@ -41,7 +45,9 @@ function updateCurhat(req,res,next){
 }
 
 function deleteCurhat(req,res,next){
+
   if(!Token){
+
     res.redirect('/login')
   }
   else{
@@ -54,6 +60,7 @@ function deleteCurhat(req,res,next){
 }
 
 function Home(req,res,next){
+
   if(!Token){
     res.redirect('/login')
   }
@@ -61,11 +68,13 @@ function Home(req,res,next){
     Curhat.find({})
     .populate('user_id')
     .exec(function(err,result){
+
     let user = jwt.verify(Token, process.env.SECRET)
       res.render('index',{curhats: result, user:user})
     })
   }  
 }
+
 
 function myCurhats (req,res,next){
   Curhat.find({
@@ -85,16 +94,20 @@ function searchCurhat(req,res,next){
   else{
     Curhat.find({
       title: req.body.title
+
     })
     .populate('user_id')
     .exec(function(err,result){
+
       res.render('search',{curhats:result})
     })
   }  
 }
 
 function editCurhat (req,res,next){
+
   if(!Token){
+
     res.redirect('/login')
   }
   else{
