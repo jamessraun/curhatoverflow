@@ -103,5 +103,5 @@ function editCurhat (req,res,next){
 }
 
 module.exports = {
-  createCurhat,updateCurhat,deleteCurhat,Home,editCurhat
+  createCurhat,updateCurhat,deleteCurhat,Home,editCurhat,searchCurhat,myCurhats
 }
