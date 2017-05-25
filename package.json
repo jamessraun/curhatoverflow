@@ -4,9 +4,13 @@
   "description": "let's curhat here with us!",
   "main": "app.js",
   "dependencies": {
+    "bcrypt": "^1.0.2",
     "body-parser": "^1.17.2",
+    "dotenv": "^4.0.0",
     "ejs": "^2.5.6",
     "express": "^4.15.3",
+    "jsonwebtoken": "^7.4.1",
+    "localstorage": "^0.1.0",
     "mongoose": "^4.10.2"
   },
   "devDependencies": {},
