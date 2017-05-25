@@ -61,9 +61,17 @@ function Home(req,res,next){
     .populate('user_id')
     .exec(function(err,result){
     let username = jwt.verify(Token, process.env.SECRET)
-      res.render('index',{curhats: result, user:username})
+      res.render('index',{curhats: result})
     })
   }  
+}
+
+function myCurhats (req,res,next){
+  Curhat.find({})
+  .populate('user_id')
+  .exec(function(err,result)=>{
+    res.render('myCurhat', {curhats:result})
+  })
 }
 
 function searchCurhat(req,res,next){
@@ -73,7 +81,9 @@ function searchCurhat(req,res,next){
   else{
     Curhat.find({
       title: req.body.title
-    },function(err,result){
+    })
+    .populate('user_id')
+    .exec(function(err,result){
       res.render('search',{curhats:result})
     })
   }  
