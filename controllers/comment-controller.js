@@ -36,7 +36,7 @@ function editComment(req, res, next) {
   } else {
     let commentID = req.params.commentID
   Comment.findOne({
-    id: commentID
+    _id: commentID
   }).exec( (err, result) => {
     res.render('yang nantinya ejs untuk edit comment', { data: result })
   })
@@ -48,7 +48,7 @@ function updateComment(req, res, next) {
   } else {
     let commentID = req.params.id
   Comment.findOne({
-    id: commentID
+    _id: commentID
   }).exec( (err, result) => {
     if (err) {
       console.log(err);
@@ -72,10 +72,10 @@ function deleteComment(req, res, next) {
   } else {
     let commentID = req.params.id
   Comment.findOne({
-    id: commentID
+    _id: commentID
   })exec( (err, result) => {
     Comment.remove({
-      id: CommentID
+      _id: CommentID
     }).exec( (err, result) => {
       res.redirect(`/curhat/${result.curhat_id}`)
     })
