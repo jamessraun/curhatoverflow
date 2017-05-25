@@ -6,7 +6,7 @@ const Token = localStorage.getItem('Token')
 require('dotenv').config()
 
 function createCurhat(req,res,next){
-  if(Token === 'false' || !Token){
+  if(!Token){
     res.redirect('/login')
   }
   else{
@@ -24,7 +24,7 @@ function createCurhat(req,res,next){
 }
 
 function updateCurhat(req,res,next){
-  if(Token === 'false' || !Token){
+  if(!Token){
     res.redirect('/login')
   }
   else{
@@ -40,7 +40,7 @@ function updateCurhat(req,res,next){
 }
 
 function deleteCurhat(req,res,next){
-  if(Token === 'false' || !Token){
+  if(!Token){
     res.redirect('/login')
   }
   else{
@@ -53,7 +53,7 @@ function deleteCurhat(req,res,next){
 }
 
 function Home(req,res,next){
-  if(Token === 'false' || !Token){
+  if(!Token){
     res.redirect('/login')
   }
   else{
@@ -67,7 +67,7 @@ function Home(req,res,next){
 }
 
 function searchCurhat(req,res,next){
-  if(Token === 'false' || !Token){
+  if(!Token){
     res.redirect('/login')
   }
   else{
@@ -80,7 +80,7 @@ function searchCurhat(req,res,next){
 }
 
 function editCurhat (req,res,next){
-  if(Token === 'false' || !Token){
+  if(!Token){
     res.redirect('/login')
   }
   else{
