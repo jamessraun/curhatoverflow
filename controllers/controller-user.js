@@ -6,7 +6,7 @@ const localStorage = require('localStorage')
 const Token = localStorage.getItem('Token')
 const nodemailer = require('nodemailer')
 const transporter = nodemailer.createTransport({
-  service: 'gmail.com'
+  service: 'gmail.com',
   auth:{
     user: process.env.user_email,
     password: process.env.password
@@ -15,13 +15,12 @@ const transporter = nodemailer.createTransport({
 
 function signup (req,res,next){
   let salt = bcrypt.genSaltSync(saltRounds)
-  let hash = bcrypt.hashSync(req.body.password,salt)
-  
+  let hash = bcrypt.hashSync(req.body.password,salt)  
   User.find({
     username: req.body.username
   },function(err,result){
     if(result){
-      res.redirect('/login',{message: 'username already exist!'})
+      res.redirect('/login')
     }
     else{
       User.create({
@@ -30,7 +29,7 @@ function signup (req,res,next){
         email: req.body.email
       },function(err,result){
         if(!req.body.username || !req.body.password || !req.body.email){
-          res.redirect('/login', message: 'Please fill all the data requirement')
+          res.redirect('/login')
         }
         else{
           let user = jwt.verify(Token,process.env.SECRET)
@@ -51,8 +50,8 @@ function signup (req,res,next){
           })          
         }        
       })
-    })
-  }  
+    }
+  })  
 }
 
 function loginscreen(req,res,next){

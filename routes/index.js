@@ -1,8 +1,9 @@
 var express = require('express')
 var UserController = require('../controllers/controller-user')
 var CurhatController = require ('../controllers/controller-curhat')
+var router = express.Router()
 
-router.get('/login',User.Controller.loginscreen)
+router.get('/login',UserController.loginscreen)
 router.get('/editProfile',UserController.editProfile)
 router.put('/updateProfile',UserController.updateProfile)
 router.post('/signup',UserController.signup)
