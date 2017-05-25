@@ -6,7 +6,11 @@ const Token = localStorage.getItem('Token')
 require('dotenv').config()
 
 function createCurhat(req,res,next){
+<<<<<<< HEAD
   if(Token === 'false' || !Token){
+=======
+  if(!Token){
+>>>>>>> master
     res.redirect('/login')
   }
   else{
@@ -24,7 +28,11 @@ function createCurhat(req,res,next){
 }
 
 function updateCurhat(req,res,next){
+<<<<<<< HEAD
   if(Token === 'false' || !Token){
+=======
+  if(!Token){
+>>>>>>> master
     res.redirect('/login')
   }
   else{
@@ -40,7 +48,11 @@ function updateCurhat(req,res,next){
 }
 
 function deleteCurhat(req,res,next){
+<<<<<<< HEAD
   if(Token === 'false' || !Token){
+=======
+  if(!Token){
+>>>>>>> master
     res.redirect('/login')
   }
   else{
@@ -53,7 +65,11 @@ function deleteCurhat(req,res,next){
 }
 
 function Home(req,res,next){
+<<<<<<< HEAD
   if(Token === 'false' || !Token){
+=======
+  if(!Token){
+>>>>>>> master
     res.redirect('/login')
   }
   else{
@@ -61,26 +77,53 @@ function Home(req,res,next){
     .populate('user_id')
     .exec(function(err,result){
     let username = jwt.verify(Token, process.env.SECRET)
+<<<<<<< HEAD
       res.render('index',{curhats: result, user:username})
+=======
+      res.render('index',{curhats: result})
+>>>>>>> master
     })
   }  
 }
 
+<<<<<<< HEAD
 function searchCurhat(req,res,next){
   if(Token === 'false' || !Token){
+=======
+function myCurhats (req,res,next){
+  Curhat.find({})
+  .populate('user_id')
+  .exec(function(err,result)=>{
+    res.render('myCurhat', {curhats:result})
+  })
+}
+
+function searchCurhat(req,res,next){
+  if(!Token){
+>>>>>>> master
     res.redirect('/login')
   }
   else{
     Curhat.find({
       title: req.body.title
+<<<<<<< HEAD
     },function(err,result){
+=======
+    })
+    .populate('user_id')
+    .exec(function(err,result){
+>>>>>>> master
       res.render('search',{curhats:result})
     })
   }  
 }
 
 function editCurhat (req,res,next){
+<<<<<<< HEAD
   if(Token === 'false' || !Token){
+=======
+  if(!Token){
+>>>>>>> master
     res.redirect('/login')
   }
   else{

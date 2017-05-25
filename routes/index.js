@@ -1,7 +1,10 @@
 var express = require('express')
 var UserController = require('../controllers/controller-user')
 var CurhatController = require ('../controllers/controller-curhat')
+<<<<<<< HEAD
 var CommentController = require ('../controllers/comment-controller')
+=======
+>>>>>>> master
 
 router.get('/login',User.Controller.loginscreen)
 router.get('/editProfile',UserController.editProfile)
@@ -16,6 +19,7 @@ router.get('/editCurhat/:id',CurhatController.editCurhat)
 router.post('/updateCurhat/:id', CurhatController.updateCurhat)
 router.post('/createCurhat',CurhatController.createCurhat)
 router.delete('/deleteCurhat/:id',CurhatController.deleteCurhat)
+<<<<<<< HEAD
 
 //untuk bikin komen
 router.post('/curhat/:id', CommentController.createcomment)
@@ -25,6 +29,8 @@ router.get('/curhat/comment/:id', CommentController.editComment)
 router.post('/curhat/comment/:commentID', CommentController.updateComment)
 //untuk delete comment
 router.delete('/deleteCurhat/:id', CommentController.deleteComment)
+=======
+>>>>>>> master
 
 
 

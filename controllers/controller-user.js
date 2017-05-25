@@ -4,6 +4,17 @@ const bcrypt = require ('bcrypt')
 const saltRounds = 10
 const localStorage = require('localStorage')
 const Token = localStorage.getItem('Token')
+<<<<<<< HEAD
+=======
+const nodemailer = require('nodemailer')
+const transporter = nodemailer.createTransport({
+  service: 'gmail.com'
+  auth:{
+    user: process.env.user_email,
+    password: process.env.password
+  }
+})
+>>>>>>> master
 
 function signup (req,res,next){
   let salt = bcrypt.genSaltSync(saltRounds)
@@ -25,7 +36,26 @@ function signup (req,res,next){
           res.redirect('/login', message: 'Please fill all the data requirement')
         }
         else{
+<<<<<<< HEAD
           res.redirect('/')
+=======
+          let user = jwt.verify(Token,process.env.SECRET)
+          var mailOptions = {
+              from: '<curhat@gmail.com>', // sender address
+              to: user.email, // list of receivers
+              subject: 'Welcome to Curhatoverflow', // Subject line
+              text: 'congratulation you are registered!', // plain text body
+              html: '<b>Please go here to get started!</b>\nwww.curhatoverflow.herokuapp.com' // html body
+          }
+          transporter.sendMail(mailOptions,(err,info)=>{
+            if(err){
+              console.log(err);
+            }
+            else{
+              res.redirect('/')
+            }            
+          })          
+>>>>>>> master
         }        
       })
     })
@@ -41,7 +71,11 @@ function login (req,res,next){
     username: req.body.username
   },function(err,result){
     if(bcrypt.compare(req.body.password,result.password)){
+<<<<<<< HEAD
       var token = jwt.sign({username: data.username},process.env.SECRET)
+=======
+      var token = jwt.sign({username: data.username,email:data.email},process.env.SECRET)
+>>>>>>> master
       localStorage.setItem('Token',token)
       res.redirect('/')
     }
@@ -49,12 +83,20 @@ function login (req,res,next){
 }
 
 function logout (req,res,next){
+<<<<<<< HEAD
   Token = 'false'
+=======
+  localStorage.clear()
+>>>>>>> master
   res.redirect('/login')
 }
 
 function editProfile (req,res,next){
+<<<<<<< HEAD
   if(Token === 'false'){
+=======
+  if(!Token){
+>>>>>>> master
     res.redirect('/login')
   }
   else{
@@ -67,6 +109,7 @@ function editProfile (req,res,next){
 }
 
 function updateProfile (req,res,next){
+<<<<<<< HEAD
   if(Token === 'false' || !Token){
     res.redirect('/login')
   }
@@ -81,6 +124,26 @@ function updateProfile (req,res,next){
       fullname: req.body.fullname 
     },function(err,result){
       res.redirect(`/editProfile/${req.params.id}`)
+=======
+  if(!Token){
+    res.redirect('/login')
+  }
+  else{
+    User.findOne({
+      _id: req.params.id
+    },function(err,result){
+      User.updateOne({
+        _id: req.params.id
+      },{
+        username: req.body.username || result.username,
+        password: req.body.password || result.password,
+        email: req.body.email || result.email,
+        phone: req.body.phone || result.phone,
+        fullname: req.body.fullname || result.fullname 
+      },function(err,result){
+        res.redirect(`/editProfile/${req.params.id}`)
+      })
+>>>>>>> master
     })
   }
 }
