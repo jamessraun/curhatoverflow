@@ -2,15 +2,22 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <title>Beranda</title>
+    <title>Profile</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
 <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
 <style media="screen">
+.img-circle {
+  border-radius: 50%;
+  width: 200px;
+}
 .selected {
   background-color: #f1f1f1;
   color:black;
+}
+.jumbotron {
+  margin-top: 100px;
 }
 </style>
 </head>
@@ -20,38 +27,32 @@
             <nav>
               <ul class="nav nav-pills float-right">
                 <li class="nav-item">
-                  <a class="nav-link selected" href="/" >Home</a>
+                  <a class="nav-link" href="/" style="color:black">Home</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="/login" style="color:black">Log In</a>
+                  <a class="nav-link selected" href="/mycurhat">Mycurhat</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="/signup" style="color:black">Sign Up</a>
+                  <a class="nav-link" href="/profile" style="color:black">Profile</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/logout" style="color:black">Log Out</a>
                 </li>
               </ul>
             </nav>
-            <h1><a class="navbar-brand" href="/" style="color:#22313F">Curhatoverflow</a></h1>
+            <h3 class="text">Curhatoverflow</h3>
           </div>
 
-          <div class="jumbotron" style="background:#446CB3">
-            <h1 class="display-3" style="color:white">Let's curhat with us!</h1>
-          </div>
+          <div class="countainer">
+            <div class="jumbotron" style="background:#446CB3">
 
-          <div class="row">
-              <div class="col-sm-6">
-                <div class="card">
-                  <div class="card-block">
-                    <h3 class="card-title">Judul</h3>
-                    <p class="card-text">Curhatan.</p>
-                    <button type="button" class="btn btn-outline-primary" >Primary</button>
-                  </div>
-                </div>
-              </div>
+            </div>
           </div>
-
-          <footer class="footer" style="margin-top:40px">
-            <p>&copy; JSS Mabok Coding 2017</p>
-          </footer>
+          <div style="margin-top:200px">
+            <footer class="footer" style="margin-top:40px">
+              <p>&copy; JSS Mabok Coding 2017</p>
+            </footer>
+          </div>
         </div>
 
       </body>
