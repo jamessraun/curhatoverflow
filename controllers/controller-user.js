@@ -64,7 +64,7 @@ function login (req,res,next){
     username: req.body.username
   },function(err,result){
     if(bcrypt.compare(req.body.password,result.password)){
-      var token = jwt.sign({username: data.username,email:data.email},process.env.SECRET)
+      var token = jwt.sign({_id: result._id,username: data.username,email:data.email},process.env.SECRET)
       localStorage.setItem('Token',token)
       res.redirect('/')
     }

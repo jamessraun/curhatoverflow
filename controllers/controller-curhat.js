@@ -11,11 +11,12 @@ function createCurhat(req,res,next){
   }
   else{
     User.findOne({
-      _id: req.params.id 
+    let user = jwt.verify(Token, process.env.SECRET)  
+      _id: user._id 
     },function(err,result){
       Curhat.create({
         curhat: req.body.curhat,
-        user_id: result.id
+        user_id: result._id
       },function(err,result){
         res.redirect('/')
       })
@@ -60,17 +61,20 @@ function Home(req,res,next){
     Curhat.find({})
     .populate('user_id')
     .exec(function(err,result){
-    let username = jwt.verify(Token, process.env.SECRET)
-      res.render('index',{curhats: result})
+    let user = jwt.verify(Token, process.env.SECRET)
+      res.render('index',{curhats: result, user:user})
     })
   }  
 }
 
 function myCurhats (req,res,next){
-  Curhat.find({})
+  Curhat.find({
+    let user = jwt.verify(Token, process.env.SECRET)
+    user_id : user._id
+  })
   .populate('user_id')
   .exec(function(err,result)=>{
-    res.render('myCurhat', {curhats:result})
+    res.render('myCurhat', {curhats:result, user:user})
   })
 }
 
