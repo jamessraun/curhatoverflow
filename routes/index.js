@@ -15,6 +15,8 @@ router.delete('/logout',UserController.logout)
 
 
 router.get('/',CurhatController.Home)
+router.get('/myCurhat',CurhatController.myCurhats)
+router.get('/Curhat',CurhatController.searchCurhat)
 router.get('/editCurhat/:id',CurhatController.editCurhat)
 router.post('/updateCurhat/:id', CurhatController.updateCurhat)
 router.post('/createCurhat',CurhatController.createCurhat)

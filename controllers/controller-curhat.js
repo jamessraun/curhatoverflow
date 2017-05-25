@@ -6,20 +6,19 @@ const Token = localStorage.getItem('Token')
 require('dotenv').config()
 
 function createCurhat(req,res,next){
-<<<<<<< HEAD
-  if(Token === 'false' || !Token){
-=======
+
   if(!Token){
->>>>>>> master
+
     res.redirect('/login')
   }
   else{
     User.findOne({
-      _id: req.params.id 
+    let user = jwt.verify(Token, process.env.SECRET)  
+      _id: user._id 
     },function(err,result){
       Curhat.create({
         curhat: req.body.curhat,
-        user_id: result.id
+        user_id: result._id
       },function(err,result){
         res.redirect('/')
       })
@@ -28,11 +27,9 @@ function createCurhat(req,res,next){
 }
 
 function updateCurhat(req,res,next){
-<<<<<<< HEAD
-  if(Token === 'false' || !Token){
-=======
+
   if(!Token){
->>>>>>> master
+
     res.redirect('/login')
   }
   else{
@@ -48,11 +45,9 @@ function updateCurhat(req,res,next){
 }
 
 function deleteCurhat(req,res,next){
-<<<<<<< HEAD
-  if(Token === 'false' || !Token){
-=======
+
   if(!Token){
->>>>>>> master
+
     res.redirect('/login')
   }
   else{
@@ -65,65 +60,54 @@ function deleteCurhat(req,res,next){
 }
 
 function Home(req,res,next){
-<<<<<<< HEAD
-  if(Token === 'false' || !Token){
-=======
+
   if(!Token){
->>>>>>> master
     res.redirect('/login')
   }
   else{
     Curhat.find({})
     .populate('user_id')
     .exec(function(err,result){
-    let username = jwt.verify(Token, process.env.SECRET)
-<<<<<<< HEAD
-      res.render('index',{curhats: result, user:username})
-=======
-      res.render('index',{curhats: result})
->>>>>>> master
+
+    let user = jwt.verify(Token, process.env.SECRET)
+      res.render('index',{curhats: result, user:user})
     })
   }  
 }
 
-<<<<<<< HEAD
-function searchCurhat(req,res,next){
-  if(Token === 'false' || !Token){
-=======
+
 function myCurhats (req,res,next){
-  Curhat.find({})
+  Curhat.find({
+    let user = jwt.verify(Token, process.env.SECRET)
+    user_id : user._id
+  })
   .populate('user_id')
   .exec(function(err,result)=>{
-    res.render('myCurhat', {curhats:result})
+    res.render('myCurhat', {curhats:result, user:user})
   })
 }
 
 function searchCurhat(req,res,next){
   if(!Token){
->>>>>>> master
     res.redirect('/login')
   }
   else{
     Curhat.find({
       title: req.body.title
-<<<<<<< HEAD
-    },function(err,result){
-=======
+
     })
     .populate('user_id')
     .exec(function(err,result){
->>>>>>> master
+
       res.render('search',{curhats:result})
     })
   }  
 }
 
 function editCurhat (req,res,next){
-<<<<<<< HEAD
-  if(Token === 'false' || !Token){
-=======
+
   if(!Token){
->>>>>>> master
+
     res.redirect('/login')
   }
   else{
@@ -136,5 +120,5 @@ function editCurhat (req,res,next){
 }
 
 module.exports = {
-  createCurhat,updateCurhat,deleteCurhat,Home,editCurhat
+  createCurhat,updateCurhat,deleteCurhat,Home,editCurhat,searchCurhat,myCurhats
 }
