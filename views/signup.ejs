@@ -23,6 +23,11 @@
           <input type="email" id="inputEmail" class="form-control" name= "email"placeholder="Email address" required> <br>
           <div class="checkbox">
           </div><br>
+          <%if(message!==null){%>
+          <div class="alert alert-danger" role="alert">
+            <strong><%-message%></strong>
+          </div>
+          <%}%>
           <button class="btn btn-lg btn-outline-primary btn-block" type="submit">Signup</button><br>
         </form>
     </div>

@@ -8,7 +8,7 @@ router.get('/login',UserController.loginscreen)
 router.get('/profile/:id',UserController.editProfile)
 router.post('/updateProfile/:id',UserController.updateProfile)
 router.get('/signup',(req,res)=>{
-  res.render('signup',{title:"Signup"})
+  res.render('signup',{title:"Signup",message:null})
 })
 router.post('/signup',UserController.signup)
 router.post('/login',UserController.login)

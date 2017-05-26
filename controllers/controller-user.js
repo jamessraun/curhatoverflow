@@ -25,12 +25,20 @@ function signup (req,res,next){
 
   console.log('---------------------',req.body);
 
-  User.find({
-    username: req.body.username
+  User.find({$or:[
+    {
+      username: req.body.username
+    },{
+      email: req.body.email
+    }]
   },function(err,result){
+    console.log(result);
     if(result.length>0){
-      console.log(result);
-      res.redirect('/signup',{title:"Signup"})
+       if(result[0].username===req.body.username)
+      res.render('signup',{title:"Signup",message:"username already exist"})
+
+       if(result[0].email===req.body.email)
+       res.render('signup',{title:"Signup",message:"email already exist"})
     }
     else{
       User.create({
@@ -38,11 +46,7 @@ function signup (req,res,next){
         password: hash,
         email: req.body.email
       },function(err,result){
-          // if(!req.body.username || !req.body.password || !req.body.email){
-          //   res.redirect('/login')
-          // }
-        //  else{
-        //    res.redirect('/')
+
         console.log('masuk sini1`````````````````````');
             var mailOptions = {
                 from: '"Curhatoverflow" <curhat@gmail.com>', // sender address
@@ -57,7 +61,7 @@ function signup (req,res,next){
                 console.log(err);
               }
               else{
-                res.redirect('/login',{title:"Signup"})
+                res.redirect('/login')
               }
             })
     //      }

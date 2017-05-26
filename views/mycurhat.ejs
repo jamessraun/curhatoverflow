@@ -89,7 +89,7 @@
 
                       <script type="text/javascript">
 
-                        var r = document.getElementById('editcurhat');
+                        var t = document.getElementById('editcurhat');
 
                         function startConvertingedit () {
                           if('webkitSpeechRecognition' in window){
@@ -117,7 +117,7 @@
                                 }
                               }
 
-                                r.value = finalTranscripts + interimTranscripts
+                                t.value = finalTranscripts + interimTranscripts
                               //r.innetHTML = interimTranscripts
                             };
                             speechRecognizer.onerror = function (event) {

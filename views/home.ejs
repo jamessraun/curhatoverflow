@@ -71,15 +71,15 @@
                     <div class="container col-8 jbg" style="margin-bottom:50px">
 
                       <form action="/curhat/<%-curhat._id%>" method="post">
-                        <textarea name="komentar" id= "comment" rows="5" cols="53" style="margin-top:20px" required></textarea>
+                        <textarea name="komentar" id= "test" rows="5" cols="53" style="margin-top:20px" required></textarea>
                         <br>
-                        <button class="btn btn-outline-primary"  type="submit" style="margin-left:95px">Comment</button>
+                        <button class="btn btn-outline-primary"  type="submit" style="margin-bottom:10px">Comment</button>
                       </form>
-                      <button class="btn btn-outline-success" onclick="startConvertingcomment();" style="margin-top:-65px">Record</button>
+                      <!-- <button class="btn btn-outline-success" onclick="startConvertingcomment();" style="margin-top:-65px">Record</button> -->
 
                       <script type="text/javascript">
 
-                        var r = document.getElementById('comment');
+                        var y = document.getElementById('test');
 
                         function startConvertingcomment () {
                           if('webkitSpeechRecognition' in window){
@@ -107,7 +107,7 @@
                                 }
                               }
 
-                                r.value = finalTranscripts + interimTranscripts
+                                y.value = finalTranscripts + interimTranscripts
                               //r.innetHTML = interimTranscripts
                             };
                             speechRecognizer.onerror = function (event) {
