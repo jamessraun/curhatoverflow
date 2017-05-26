@@ -1,0 +1,138 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+ <% include ./partials/head %>
+</head>
+  <body class="bodyg">
+    <div class="container col-8 bg ct">
+          <div class="header clearfix">
+            <nav>
+              <%include ./partials/nav%>
+            </nav>
+            <h1><a class="navbar-brand" href="/" style="color:#22313F">Curhatoverflow</a></h1>
+          </div>
+
+          <div class="jumbotron home hg">
+            <h1 style="color:white">Let's curhat with us!</h1>
+          </div>
+
+          <div class="row">
+            <% curhats.forEach((curhat,index)=>{ %>
+              <div class="col-sm-6" style="margin-top:10px">
+                <div class="card">
+                  <div class="card-block">
+                    <h3 class="card-title" style="color:white" data-toggle="modal" data-target=".bd-comment-modal-lg<%-index%>">Curhater</h3>
+                    <p class="card-text" style="color:white"data-toggle="modal" data-target=".bd-comment-modal-lg<%-index%>"><%- curhat.curhat %></p>
+                      <button class="btn btn-outline-primary" data-toggle="modal" data-target=".bd-textarea-modal-lg<%-index%>">Comment</button>
+                    <!-- <button type="button" class="btn btn-outline-primary" >Comment</button> -->
+                    <button type="button" class="btn btn-outline-success" onClick='responsiveVoice.speak("<%- curhat.curhat%>", "Indonesian Female",{pitch: 2},{rate: 1.5});'>Lazy</button>
+                  </div>
+                </div>
+              </div>
+              <!-- MODAL COMMENTS-->
+              <div class="modal fade bd-comment-modal-lg<%-index%>" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                  <div class="modal-content bg">
+                    <div class="container col-8" style="margin-top:20px">
+                      <div class="card">
+                        <div class="card-block">
+                          <h3 class="card-title" style="color:white">Curhater</h3>
+                          <p class="card-text" style="color:white"><%- curhat.curhat %></p>
+                          <button type="button" class="btn btn-outline-success" onClick='responsiveVoice.speak("<%- curhat.curhat%>", "Indonesian Female",{pitch: 2},{rate: 1.5});'>Lazy</button>
+                        </div>
+                      </div>
+                      <%comments.forEach(comment => {%>
+                        <%if(JSON.stringify(curhat._id) === JSON.stringify(comment.curhat_id)){%>
+                        <div class="card-modal">
+                          <div class="card-block">
+
+                            <p><%-comment.comment%></p>
+                            <% if(JSON.stringify(user._id) === JSON.stringify(comment.user_id) || JSON.stringify(user._id) === JSON.stringify(curhat.user_id)) { %>
+                                <a href="/deleteComment/<%=comment._id%>"><button class="btn btn-outline-danger" type="button" onclick="return confirm('Are you sure you want to delete this comment?')">DELETE</button></a>
+                            <%}%>
+                          </div>
+                        </div>
+                        <%}%>
+                      <%})%>
+
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- END OF MODAL COMMENTS -->
+              <!-- MODAL TEXTAREA-->
+              <div class="modal fade bd-textarea-modal-lg<%-index%>" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                  <div class="modal-content bg">
+                    <div class="container col-8" style="margin-top:50px">
+                      <h2>Comment</h2>
+                    </div>
+                    <div class="container col-8 jbg" style="margin-bottom:50px">
+
+                      <form action="/curhat/<%-curhat._id%>" method="post">
+                        <textarea name="komentar" id= "comment" rows="5" cols="53" style="margin-top:20px" required></textarea>
+                        <br>
+                        <button class="btn btn-outline-primary"  type="submit" style="margin-left:95px">Comment</button>
+                      </form>
+                      <button class="btn btn-outline-success" onclick="startConvertingcomment();" style="margin-top:-65px">Record</button>
+
+                      <script type="text/javascript">
+
+                        var r = document.getElementById('comment');
+
+                        function startConvertingcomment () {
+                          if('webkitSpeechRecognition' in window){
+                            var speechRecognizer = new webkitSpeechRecognition();
+                            speechRecognizer.continuous = true;
+                            speechRecognizer.interimResults = true;
+                            // id-ID en-IN
+                            speechRecognizer.lang = 'id-ID';
+                            speechRecognizer.start();
+
+                            var finalTranscripts = '';
+
+                            speechRecognizer.onresult = function(event){
+                              var interimTranscripts = '';
+                              for(var i = event.resultIndex; i < event.results.length; i++){
+                                var transcript = event.results[i][0].transcript;
+                               //if(transcript.trim()==="jenat"||transcript.trim()==="Jenat")
+                                  if(transcript.trim() === "RM")
+                                  location.reload()
+                                transcript.replace("\n", "<br>");
+                                if(event.results[i].isFinal){
+                                  finalTranscripts += transcript;
+                                }else{
+                                  interimTranscripts += transcript;
+                                }
+                              }
+
+                                r.value = finalTranscripts + interimTranscripts
+                              //r.innetHTML = interimTranscripts
+                            };
+                            speechRecognizer.onerror = function (event) {
+                            };
+                          }
+                        }
+                      </script>
+                    </div>
+                </div>
+              </div>
+              </div>
+              <!-- END OF MODAL TEXTAREA -->
+              <%  }) %>
+          </div>
+          <div style="margin-top:50px">
+              <hr>
+          </div>
+        </div>
+        <div class="container col-8">
+          <footer class="footer" style="margin-top:10px">
+            <p style="color:white">&copy; JSS Mabok Coding 2017  @<a style="color:white" href="//twitter.com/storyoverflow1">Curhatoverflow</a></p>
+
+          </footer>
+        </div>
+
+
+</body>
+</html>

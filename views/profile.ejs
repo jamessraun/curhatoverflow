@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+     <% include ./partials/head %>
+</head>
+  <body class="bodyg">
+    <div class="container col-8 bg ct">
+          <div class="header clearfix">
+            <nav>
+              <%include ./partials/nav%>
+            </nav>
+            <h1><a class="navbar-brand" href="/" style="color:#22313F">Curhatoverflow</a></h1>
+          </div>
+
+          <div class="countainer">
+            <div class="jumbotron jbg">
+
+            <div class="row">
+              <div class="col-md-4">
+                <img class="img-circle" src="http://s3.amazonaws.com/37assets/svn/765-default-avatar.png">
+              </div>
+              <div class="col-md-8" style="margin-top:20px">
+                <form action="/updateProfile/<%-user._id%>" method="post">
+                  <div class="form-group row">
+                    <label for="example-text-input" class="col-2 col-form-label" style="color:white">Name</label>
+                    <div class="col-10">
+                      <input class="form-control" type="text" name="fullname" value='<%-user.fullname%>' >
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="example-email-input" class="col-2 col-form-label" style="color:white">Email</label>
+                    <div class="col-10">
+                      <input class="form-control" type="email" name="email" value='<%-user.email%>'>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="example-tel-input" class="col-2 col-form-label" style="color:white" name="phone">Telephone</label>
+                    <div class="col-10">
+                      <input class="form-control" type="tel" name="phone" value='<%-user.phone%>'>
+                    </div>
+                  </div>
+                  <button type="submit" class="btn btn-outline-warning" style="margin-left:95px">Edit</button>
+                </form>
+                </div>
+                </div>
+              </div>
+          </div>
+          <div style="margin-top:100px">
+              <hr>
+          </div>
+        </div>
+        <div class="container col-8">
+          <footer class="footer" style="margin-top:10px">
+            <p style="color:white">&copy; JSS Mabok Coding 2017</p>
+          </footer>
+        </div>
+
+      </body>
+</body>
+</html>
