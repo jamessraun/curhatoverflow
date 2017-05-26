@@ -1,0 +1,147 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+ <% include ./partials/head %>
+
+</head>
+<body class="bodyg">
+  <div class="container col-8 bg ct">
+        <div class="header clearfix">
+          <nav>
+            <%include ./partials/nav%>
+          </nav>
+          <h1><a class="navbar-brand" href="/" style="color:#22313F">Curhatoverflow</a></h1>
+        </div>
+        <div class="jumbotron jbg">
+                  <form action="/createCurhat" method="post">
+            <textarea id="result" name="curhat" rows="8" cols="87" required></textarea>
+            <br>
+            <button class="btn btn-outline-primary" type="submit" style="margin-left:90px">Curhat</button>
+          </form>
+          <button class="btn btn-outline-success" onclick="startConverting();" style="margin-top:-65px">Record</button>
+
+          <script type="text/javascript">
+
+            var r = document.getElementById('result');
+
+            function startConverting () {
+              if('webkitSpeechRecognition' in window){
+                var speechRecognizer = new webkitSpeechRecognition();
+                speechRecognizer.continuous = true;
+                speechRecognizer.interimResults = true;
+                // id-ID en-IN
+                speechRecognizer.lang = 'id-ID';
+                speechRecognizer.start();
+
+                var finalTranscripts = '';
+
+                speechRecognizer.onresult = function(event){
+                  var interimTranscripts = '';
+                  for(var i = event.resultIndex; i < event.results.length; i++){
+                    var transcript = event.results[i][0].transcript;
+                   //if(transcript.trim()==="jenat"||transcript.trim()==="Jenat")
+                      if(transcript.trim() === "RM")
+                    location.reload();
+                    transcript.replace("\n", "<br>");
+                    if(event.results[i].isFinal){
+                      finalTranscripts += transcript;
+                    }else{
+                      interimTranscripts += transcript;
+                    }
+                  }
+
+                    r.value = finalTranscripts + interimTranscripts
+                  //r.innetHTML = interimTranscripts
+                };
+                speechRecognizer.onerror = function (event) {
+                };
+              }
+            }
+          </script>
+        </div>
+
+          <div class="row">
+            <% curhats.forEach((curhat,index)=>{ %>
+              <div class="col-sm-6">
+                <div class="card">
+                  <div class="card-block">
+                    <h3 class="card-title" style="color:white">Curhater</h3>
+                    <p class="card-text" style="color:white"><%- curhat.curhat %></p>
+                    <button class="btn btn-outline-warning" data-toggle="modal" data-target=".bd-textarea-modal-lg<%-index%>">Edit</button>
+                    <a href="/deleteCurhat/<%- curhat._id %>"><button type="button" class="btn btn-outline-danger" onclick="return confirm('Are you sure you want to delete this curhat?')" >Delete</button></a>
+                  </div>
+                </div>
+              </div>
+              <div class="modal fade bd-textarea-modal-lg<%-index%>" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                  <div class="modal-content bg">
+                    <div class="container col-8" style="margin-top:50px">
+                      <h2>Edit Curhat</h2>
+                    </div>
+                    <div class="container col-8 jbg" style="margin-bottom:50px">
+
+                      <form action="/updateCurhat/<%- curhat._id %>" method="post">
+                        <textarea name="curhatnew" id = 'editcurhat' rows="5" cols="53" style="margin-top:20px" required><%- curhat.curhat %></textarea>
+                        <br>
+                        <button class="btn btn-outline-primary" type="submit" style="margin-left:100px"role="button" data-toggle="popover" data-trigger="focus" title="Dismissible popover" data-content="And here's some amazing content. It's very engaging. Right?" >Edit</button>
+                      </form>
+                      <button class="btn btn-outline-success" onclick="startConvertingedit();" style="margin-top:-65px">Record</button>
+
+                      <script type="text/javascript">
+
+                        var r = document.getElementById('editcurhat');
+
+                        function startConvertingedit () {
+                          if('webkitSpeechRecognition' in window){
+                            var speechRecognizer = new webkitSpeechRecognition();
+                            speechRecognizer.continuous = true;
+                            speechRecognizer.interimResults = true;
+                            // id-ID en-IN
+                            speechRecognizer.lang = 'id-ID';
+                            speechRecognizer.start();
+
+                            var finalTranscripts = '';
+
+                            speechRecognizer.onresult = function(event){
+                              var interimTranscripts = '';
+                              for(var i = event.resultIndex; i < event.results.length; i++){
+                                var transcript = event.results[i][0].transcript;
+                               //if(transcript.trim()==="jenat"||transcript.trim()==="Jenat")
+                                  if(transcript.trim() === "RM")
+                                  location.reload()
+                                transcript.replace("\n", "<br>");
+                                if(event.results[i].isFinal){
+                                  finalTranscripts += transcript;
+                                }else{
+                                  interimTranscripts += transcript;
+                                }
+                              }
+
+                                r.value = finalTranscripts + interimTranscripts
+                              //r.innetHTML = interimTranscripts
+                            };
+                            speechRecognizer.onerror = function (event) {
+                            };
+                          }
+                        }
+                      </script>
+                    </div>
+                </div>
+              </div>
+              </div>
+              <%  }) %>
+          </div>
+
+          <div style="margin-top:50px">
+              <hr>
+          </div>
+      </div>
+      <div class="container col-8">
+        <footer class="footer" style="margin-top:10px">
+          <p style="color:white">&copy; JSS Mabok Coding 2017</p>
+        </footer>
+      </div>
+
+</body>
+</body>
+</html>

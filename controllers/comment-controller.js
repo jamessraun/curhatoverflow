@@ -2,28 +2,31 @@ const Curhat = require ('../models/curhat.js')
 const User = require ('../models/user.js')
 const Comment = require('../models/comment.js')
 const jwt = require ('jsonwebtoken')
-const localStorage = require('localStorage')
-const Token = localStorage.getItem('Token')
+const Storage = require('dom-storage')
+var localStorage = new Storage('./db.json',{strict:false,ws:' '})
+var Token = localStorage.getItem('myKey')
 require('dotenv').config()
 
 function createcomment(req, res, next) {
+  console.log(req.body);
   if(!Token){
     res.redirect('/login')
   } else {
-    let username = jwt.verify(Token, process.env.SECRET)
+    let user = jwt.verify(Token, process.env.SECRET)
     User.findOne({
-        username: username
-      }).exec((err, result) => {
+        _id: user._id
+      },(err, result) => {
+        console.log(result);
         if (err) {
           console.log(err);
         } else {
-          let UserID = result.id
+          let UserID = result._id
           Comment.create({
-            curhat_id: req.params.id
-            comment: req.body.komen
+            curhat_id: req.params.id,
+            comment: req.body.komentar,
             user_id: UserID
-          }).exec( (err, result) => {
-            res.redirect(`/curhat/${req.params.id}`)
+          },(err, result) =>{
+            res.redirect(`/`)
           })
         }
       })
@@ -59,7 +62,7 @@ function updateComment(req, res, next) {
         if (err) {
           console.log(err);
         } else {
-          res.redirect(`/curhat/${result.curhat_id}`)
+          res.redirect(`/`)
         }
       })
     }
@@ -70,16 +73,13 @@ function deleteComment(req, res, next) {
   if(!Token){
     res.redirect('/login')
   } else {
-    let commentID = req.params.id
-  Comment.findOne({
-    _id: commentID
-  })exec( (err, result) => {
+    // let commentID = req.params.id
     Comment.remove({
-      _id: CommentID
+      _id: req.params.id
     }).exec( (err, result) => {
-      res.redirect(`/curhat/${result.curhat_id}`)
+      console.log(result);
+      res.redirect(`/`)
     })
-  })
 }}
 
 module.exports = {

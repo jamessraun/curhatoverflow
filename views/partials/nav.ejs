@@ -1,0 +1,54 @@
+
+<%if(user._id!==null){%>
+
+  <ul class="nav nav-pills float-right">
+    <%if(title==='Home'){%>
+    <li class="nav-item">
+      <a class="nav-link selected" href="/" >Home</a>
+    </li>
+    <%}else{%>
+      <li class="nav-item">
+        <a class="nav-link" style="color:black" href="/" >Home</a>
+      </li>
+      <%}%>
+    <%if(title==='Mycurhat'){%>
+    <li class="nav-item">
+      <a class="nav-link selected" href="/mycurhat" style="color:black">Mycurhat</a>
+    </li>
+    <%}else{%>
+      <li class="nav-item">
+        <a class="nav-link" href="/mycurhat" style="color:black">Mycurhat</a>
+      </li>
+    <%}%>
+    <%if(title==='Profile'){%>
+    <li class="nav-item">
+      <a class="nav-link selected" href="/profile/<%-user._id%>" style="color:black">Profile</a>
+    </li>
+    <%}else{%>
+      <li class="nav-item">
+        <a class="nav-link" href="/profile/<%-user._id%>" style="color:black">Profile</a>
+      </li>
+      <%}%>
+    <li class="nav-item">
+      <a class="nav-link" href="/logout" style="color:black">Logout</a>
+    </li>
+  </ul>
+<%}else{%>
+  <ul class="nav nav-pills float-right">
+      <%if(title==='Home'){%>
+    <li class="nav-item">
+      <a class="nav-link selected" href="/" >Home</a>
+    </li>
+    <%}else{%>
+      <li class="nav-item">
+        <a class="nav-link" style="color:black" href="/" >Home</a>
+      </li>
+      <%}%>
+    <li class="nav-item">
+      <a class="nav-link" href="/login" style="color:black">Log In</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/signup" style="color:black">Sign Up</a>
+    </li>
+  </ul>
+<%}%>
